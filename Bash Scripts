@@ -1,0 +1,45 @@
+#!/bin/bash --login
+#PBS -l walltime=06:00:00
+#PBS -l select=16:ncpus=32
+#PBS -N 2018job
+#PBS -A d411-training
+
+cd $PBS_O_WORKDIR
+
+#load modules
+module load miniconda/python2
+
+#setting temporary directory and activating qiime
+mkdir -p ~/qiime_tmp
+export TMPDIR=~/qiime_tmp
+
+echo "loading virtual env"
+source activate qiime1
+
+echo "Joining"
+#Joining Read1&2
+#join_paired_ends.py -f Read1.fastq.gz -r Read2.fastq.gz -b Index.fastq.gz -m SeqPrep -o JoinEnds
+
+echo "splitting library"
+#splitlibrary
+#split_libraries_fastq.py -m ~/2018_02_smb/map_incomplete.tsv -i ~/2018_02_smb/JoinEnds/seqprep_assembled.fastq.gz -b ~/2018_02_smb/JoinEnds/seqprep_assembled.fastq_barcodes.fastq -o dem2 -q 19 --store_qual_scores --rev_comp_barcode --rev_comp_mapping_barcodes
+
+echo "Counting"
+#time count_seqs.py -i ~/2018_02_smb/dem2/seqs.fna -o countseqs
+
+echo "Picking"
+#pick_closed_reference_otus.py -i ~/2018_02_smb/dem2/seqs.fna -o ~/2018_02_smb/otusSilva -a -O 8 -t ~/SILVA_128_QIIME_release/taxonomy/16S_only/97/consensus_taxonomy_all_levels.txt  -p silva-128-params.txt -r ~/SILVA_128_QIIME_release/rep_set/rep_set_16S_only/97/97_otus_16S.fasta
+
+echo "Core Diversity analysis"
+#core_diversity_analyses.py -i ~/2018_02_smb/otusSilva/otu_table.biom -m ~/2018_02_smb/map.tsv -e 605 -a -o CDA2 --nonphylogenetic_diversity
+
+echo "Summariza Taxa"
+#summarize_taxa.py -i ~/2018_02_smb/Baron/otus/otu_table.biom -o ./summarize_taxa_3_top_90_2 -L 2
+
+echo "Compare Taxa"
+compare_taxa_summaries.py -i ~/2018_02_smb/summarize_taxa_3_top_90/otu_table_L2.txt,summarize_taxa_3_top_90_2/otu_table_L2.txt -m paired -o taxa_comparison_low -c spearman -t low
+
+echo "Plot Taxa"
+plot_taxa_summary.py -i ~/2018_02_smb/taxa_comparison_low/otu_table_L2_sorted_and_filled_0.txt -l phylum -c pie,bar,area -o phylum_charts-spearman0
+
+source deactivate
