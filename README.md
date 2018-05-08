@@ -25,3 +25,4 @@ The scripts should be carried out in the following order:
 5. Summarize Taxa
 6. Compare Taxa
 7. Plot Taxa
+8. Statistical Tests can then be carried out, for the purpose of Comparing the two reference databases, the stats test were not required to run as a script as they did not require the mapping file. However, for hypotheses which compare the gnerated data to various categories in the mapping file such as pH, the compare_categories.py script could be used to analyse statistical significance of sample groupings using distance matrices.
