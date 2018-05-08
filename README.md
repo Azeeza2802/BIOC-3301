@@ -1,5 +1,5 @@
 # BIOC-3301
-Datasets for this year's Soil collection data were uploaded to High performance Cluster Cirrus and processed according to the bash scripts "3301 shown for both reference databases, Greengenes and SILVA
+Datasets for this year's Soil collection data were uploaded to High performance Cluster Cirrus and processed according to the bash scripts shown for both reference databases, Greengenes and SILVA
 
 The files contain several lines of codes starting with #, which are instructions for the HPC job queue. Such as how long the job will run on how many cores, how much RAM and storage is required.
 
