@@ -1,9 +1,27 @@
 # BIOC-3301
-Datasets for this year's Soil collection data were uploaded to High performance Cluster Cirrus and processed according to the bash scripts 2018_02_smb. The standard output from these scripts is saved in 8 and Baron, respectively.
+Datasets for this year's Soil collection data were uploaded to High performance Cluster Cirrus and processed according to the bash scripts "3301 shown for both reference databases, Greengenes and SILVA
 
 The files contain several lines of codes starting with #, which are instructions for the HPC job queue. Such as how long the job will run on how many cores, how much RAM and storage is required.
 
-The data for 2017 had both reads joined, prior to de-multiplexing.
+The data for 2017-2018 had both reads joined, prior to de-multiplexing.
 
 After picking OTUs with the Greengenes reference the BIOM-formated tables were merged with the command in merge_otu_tables.sh. This was repeated later with the SILVA reference database.
 
+QIIME Analysis Workflow
+
+1) Validate mapping file - Remember to detele spaces in mapping file
+2) Joining reads together - Set parameters for overlap
+3) Splitting librarires and Demultiplexing using mapping file and joined reads
+4) Making OTU table using slout sequence file and for Greengenes reference database)(Repeat for SILVA analysis with SILVA        refrence database)
+5) Filter OTU table to remove the sample with the lowest counts
+6) Use OTU table to do alpha/beta diversity analyis and dilltered mapping file
+7) Other statistical analysis and tests
+
+The scripts should be carreied out in the following order:
+1. Joining Reads
+2. Split librarites
+3. Counting and Picking OTU
+4 Core diversity analysis 
+5. Summarize Taxa
+6. Compare Taxa
+7. Plot Taxa
