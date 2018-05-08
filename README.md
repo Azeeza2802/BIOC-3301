@@ -5,21 +5,21 @@ The files contain several lines of codes starting with #, which are instructions
 
 The data for 2017-2018 had both reads joined, prior to de-multiplexing.
 
-After picking OTUs with the Greengenes reference the BIOM-formated tables were merged with the command in merge_otu_tables.sh. This was repeated later with the SILVA reference database.
+After picking OTUs with the Greengenes reference the BIOM-formatted tables were merged with the command in merge_otu_tables.sh. This was repeated later with the SILVA reference database.
 
 QIIME Analysis Workflow
 
-1) Validate mapping file - Remember to detele spaces in mapping file
+1) Validate mapping file - Remember to delete spaces in mapping file
 2) Joining reads together - Set parameters for overlap
-3) Splitting librarires and Demultiplexing using mapping file and joined reads
-4) Making OTU table using slout sequence file and for Greengenes reference database)(Repeat for SILVA analysis with SILVA        refrence database)
+3) Splitting libraries and Demultiplexing using mapping file and joined reads
+4) Making OTU table using slout sequence file and for Greengenes reference database) (Repeat for SILVA analysis with SILVA reference database)
 5) Filter OTU table to remove the sample with the lowest counts
-6) Use OTU table to do alpha/beta diversity analyis and dilltered mapping file
+6) Use OTU table to do alpha/beta diversity analysis and filtered mapping file
 7) Other statistical analysis and tests
 
-The scripts should be carreied out in the following order:
+The scripts should be carried out in the following order:
 1. Joining Reads
-2. Split librarites
+2. Split libraries
 3. Counting and Picking OTU
 4 Core diversity analysis 
 5. Summarize Taxa
